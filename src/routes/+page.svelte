@@ -1,21 +1,17 @@
-<script>
-    //import { onMount } from "svelte";
-    //import { GridStack } from "gridstack";
-    //import "gridstack/dist/gridstack-all.js"
-    //import "gridstack/dist/gridstack.css";
-    //import "gridstack/dist/gridstack-extra.css";
-    //console.log(GridStack);
-
-    import Feed from "$lib/feed.svelte";
-</script>
-
-<Feed/>
+<div>
+	<img src="wormhole-logo-square-transparent.png" />
+	<h1>Coming soon...</h1>
+</div>
 
 <style>
-    .grid-item {
-        width: 25%;
-    }
-    .grid-item--width2 {
-        width: 50%;
-    }
+	div {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		min-height: 100vh;
+	}
+
+	img {
+		width: 30%;
+	}
 </style>
