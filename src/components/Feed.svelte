@@ -1,6 +1,6 @@
 <script>
     import Masonry from "svelte-bricks";
-    import FeedItem from "$lib/FeedItem.svelte";
+    import FeedItem from "./FeedItem.svelte";
 
     export let items;
     let col1 = [];

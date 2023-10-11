@@ -1,6 +1,6 @@
 <script>
     import { getFeed } from "$lib/firebase.js";
-    import Feed from "$lib/Feed.svelte";
+    import Feed from "../../components/Feed.svelte";
     import { items } from '$lib/stores.js';
 
     let items_value
