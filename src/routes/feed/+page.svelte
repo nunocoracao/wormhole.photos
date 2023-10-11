@@ -1,38 +1,36 @@
 <script>
-    //import { onMount } from "svelte";
-    //import { GridStack } from "gridstack";
-    //import "gridstack/dist/gridstack-all.js"
-    //import "gridstack/dist/gridstack.css";
-    //import "gridstack/dist/gridstack-extra.css";
-    //console.log(GridStack);
-
-    //import Feed from "$lib/feed.svelte";
-
     import { getFeed } from "$lib/firebase.js";
+    import Feed from "$lib/Feed.svelte";
+    import { items } from '$lib/stores.js';
 
-    let feed = [];
+    let items_value
+
+    items.subscribe(value => {
+        items_value = value
+    })
 
     getFeed().then((data) => {
-        console.log(data);
-        feed = data;
-    });
+        //items.set(data)
 
+        var temp_items = []
+
+        for(var i = 0; i < 100; i++){
+            var temp_item = {
+                id: (((1+Math.random())*0x10000)|0).toString(16).substring(1),
+                title: "example image",
+                timestamp: i,
+                imageSrc: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-"+Math.floor(Math.random() * (10 - 1 + 1) + 1)+".jpg"
+            }
+            temp_items.push(temp_item)
+        }
+        
+        items.set(temp_items)
+    });
 
 </script>
 
-{#each feed as item}
-    <a style="margin:10px" target="_blank" href={"/feed/" + item.id}>
-        <h1>{item.title}</h1>
-        <p>{item.timestamp}</p>
-        <img style="width:300px" src={item.imageSrc} />
-    </a>
-{/each}
 
-<style>
-    .grid-item {
-        width: 25%;
-    }
-    .grid-item--width2 {
-        width: 50%;
-    }
-</style>
+<Feed items={items_value} />
+
+
+
