@@ -24,13 +24,24 @@
             temp_items.push(temp_item)
         }
         
+        setInterval(()=>{
+            items.set(items_value.concat({
+                id: (((1+Math.random())*0x10000)|0).toString(16).substring(1),
+                title: "example image",
+                timestamp: 10,
+                imageSrc: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-"+Math.floor(Math.random() * (10 - 1 + 1) + 1)+".jpg"
+            }))
+        }, 100000000)
+
         items.set(temp_items)
     });
 
 </script>
 
 
-<Feed items={items_value} />
+<div style="max-width:1100px">
+    <Feed items={items_value} />
+</div>
 
 
 
