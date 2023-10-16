@@ -1,6 +1,5 @@
 {
 	"/": [],
-	"/feed": [],
 	"/feed/[slug]": [
 		"src/routes/feed/[slug]/+page.ts"
 	]

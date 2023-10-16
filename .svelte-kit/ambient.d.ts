@@ -33,7 +33,6 @@ declare module '$env/static/private' {
 	export const _P9K_TTY: string;
 	export const TERM: string;
 	export const SHELL: string;
-	export const npm_config_metrics_registry: string;
 	export const HOMEBREW_REPOSITORY: string;
 	export const TMPDIR: string;
 	export const npm_config_global_prefix: string;
@@ -72,6 +71,7 @@ declare module '$env/static/private' {
 	export const npm_package_name: string;
 	export const P9K_TTY: string;
 	export const LANG: string;
+	export const npm_config_npm_version: string;
 	export const VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
 	export const XPC_FLAGS: string;
 	export const npm_config_node_gyp: string;
@@ -135,7 +135,6 @@ declare module '$env/dynamic/private' {
 		_P9K_TTY: string;
 		TERM: string;
 		SHELL: string;
-		npm_config_metrics_registry: string;
 		HOMEBREW_REPOSITORY: string;
 		TMPDIR: string;
 		npm_config_global_prefix: string;
@@ -174,6 +173,7 @@ declare module '$env/dynamic/private' {
 		npm_package_name: string;
 		P9K_TTY: string;
 		LANG: string;
+		npm_config_npm_version: string;
 		VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
 		XPC_FLAGS: string;
 		npm_config_node_gyp: string;

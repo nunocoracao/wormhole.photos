@@ -1,17 +1,49 @@
-<div>
-	<img src="wormhole-logo-square-transparent.png" />
-	<h1>Coming soon...</h1>
+<script>
+    import { getFeed } from "$lib/firebase.js";
+    import Feed from "../components/Feed.svelte";
+    import { items } from "$lib/stores.js";
+
+    let items_value;
+
+    items.subscribe((value) => {
+        items_value = value;
+    });
+
+    getFeed().then((data) => {
+        //items.set(data)
+
+        var temp_items = [];
+
+        for (var i = 0; i < 100; i++) {
+            var temp_item = {
+                id: (((1 + Math.random()) * 0x10000) | 0)
+                    .toString(16)
+                    .substring(1),
+                title: "example image",
+                timestamp: i,
+                imageSrc:
+                    "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-" +
+                    Math.floor(Math.random() * (10 - 1 + 1) + 1) +
+                    ".jpg",
+            };
+            temp_items.push(temp_item);
+        }
+
+        /*setInterval(()=>{
+            items.set(items_value.concat({
+                id: (((1+Math.random())*0x10000)|0).toString(16).substring(1),
+                title: "example image",
+                timestamp: 10,
+                imageSrc: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-"+Math.floor(Math.random() * (10 - 1 + 1) + 1)+".jpg"
+            }))
+        }, 100000000)*/
+
+        items.set(temp_items);
+    });
+</script>
+
+<div class="justify-center">
+    <div class="max-w-[2100px] mx-auto pt-10">
+        <Feed items={items_value} />
+    </div>
 </div>
-
-<style>
-	div {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		min-height: 100vh;
-	}
-
-	img {
-		width: 30%;
-	}
-</style>
