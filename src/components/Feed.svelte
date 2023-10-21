@@ -2,7 +2,7 @@
     import Masonry from "svelte-bricks";
     import FeedItem from "./FeedItem.svelte";
     export let items;
-    let [minColWidth, maxColWidth, gap] = [400, 800, 20];
+    let [minColWidth, maxColWidth, gap] = [450, 800, 10];
     let width, height;
 </script>
 

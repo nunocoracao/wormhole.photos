@@ -23,7 +23,7 @@ const db = getFirestore();
 
 export const getFeed = async () => {
     return new Promise(async (resolve, reject) => {
-        const q = query(collection(db, "feed"), orderBy("timestamp", "desc"), limit(10));
+        const q = query(collection(db, "feed"), orderBy("timestamp", "desc"), limit(200));
         const querySnapshot = await getDocs(q);
         const docs = [];
         querySnapshot.forEach((doc) =>
