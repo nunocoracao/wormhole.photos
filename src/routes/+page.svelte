@@ -9,7 +9,7 @@
     let items_value;
     let element;
     let loading = true;
-    let limit = 10;
+    let limit = 20;
     let startAt = 0;
     let hasMore = true;
 
