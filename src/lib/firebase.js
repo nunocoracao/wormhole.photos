@@ -26,10 +26,8 @@ export const getFeed = async (size, after) => {
     return new Promise(async (resolve, reject) => {
         let q;
         if (after) {
-            console.log('where')
             q = query(collection(db, "feed"), where('timestamp', '<' , after), orderBy("timestamp", "desc"), limit(size));
         } else {
-            console.log('nowhere')
             q = query(collection(db, "feed"), orderBy("timestamp", "desc"), limit(size));
         }
         const querySnapshot = await getDocs(q);

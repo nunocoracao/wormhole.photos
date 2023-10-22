@@ -19,11 +19,7 @@
 
     const fetchFeed = async () => {
         loading = true;
-        console.log("fetching feed")
         getFeed(limit, startAt).then((data) => {
-            console.log("got feed")
-
-            console.log(data)
             loading = false;
             startAt = data[data.length - 1].timestamp;
             if (data.length < limit) hasMore = false;
@@ -39,13 +35,6 @@
     });
 
     const handleChange = (e) => {
-        // To get more results, we'll increment the page by 1
-        //page++;
-        // And fetch more data
-        //if (e.detail.inView && hasMore) fetchData(page);
-        console.log(loading)
-        console.log(hasMore)
-        console.log(items_value.length)
         if (!loading && hasMore) {
             loading = true;
             fetchFeed();
