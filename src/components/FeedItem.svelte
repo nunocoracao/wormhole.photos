@@ -3,7 +3,7 @@
 
 </script>
 
-<a class="w-full" target="_blank" href={item.id}>
+<a class="w-full" href={item.id}>
     <div class="item-content">
         <!--h1>{item.title}</h1>
         <p>{item.timestamp}</p>

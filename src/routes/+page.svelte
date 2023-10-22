@@ -1,16 +1,17 @@
 <script>
-    import { onMount } from "svelte";
+    import { onMount, onDestroy } from "svelte";
     import { ProgressRadial } from "@skeletonlabs/skeleton";
     import { getFeed } from "$lib/firebase.js";
     import Feed from "../components/Feed.svelte";
     import { items } from "$lib/stores.js";
 
-    let items_value;
+    let items_value = [];
     let element;
     let loading = true;
-    let limit = 12;
-    let startAt = 0;
+    let limit = 20;
+    let startAt = null;
     let hasMore = true;
+    let observer;
 
     items.subscribe((value) => {
         items_value = value;
@@ -30,15 +31,23 @@
 
     onMount(() => {
         fetchFeed();
-        var observer = new IntersectionObserver(
+        observer = new IntersectionObserver(
             function (entries) {
-                if (entries[0].isIntersecting === true)
-                    handleChange()
+                if (entries[0].isIntersecting === true) handleChange();
             },
             { threshold: [1] }
         );
         observer.observe(element);
+    });
 
+    onDestroy(() => {
+        let items_value = [];
+        let loading = true;
+        let startAt = null;
+        let hasMore = true;
+        items.set([]);
+        if(observer)
+            observer.unobserve(element);
     });
 
     const handleChange = (e) => {

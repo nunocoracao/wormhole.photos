@@ -1,4 +1,5 @@
 <script>
+    import { onMount, onDestroy } from "svelte";
     import { ProgressRadial } from "@skeletonlabs/skeleton";
     import { getItem, getIds } from "$lib/firebase.js";
     import Feed from "../../components/Feed.svelte";
@@ -6,28 +7,34 @@
     export let data;
     let loading = true;
 
+    let id = data.slug;
+    
     let item = null;
     let related_items = [];
 
-    getItem(data.slug).then((data) => {
-        item = data;
-        loading = false;
-        var related_ids = []
-        for(var i in item.links){
-            related_ids.push(item.links[i].id)
-        }
-        getIds(related_ids).then((data) => {
-            related_items = data
-        })
-    });
+    $: {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        getItem(data.slug).then((data) => {
+            item = data;
+            loading = false;
+            var related_ids = [];
+            for (var i in item.links) {
+                related_ids.push(item.links[i].id);
+            }
+            getIds(related_ids).then((data) => {
+                related_items = data;
+
+            });
+        });
+    }
 
 </script>
 
+{#key id}
 <div class="justify-center">
     <div class="max-w-[900px] mx-auto pt-40">
-        <a style="m-[10px] px-1" target="_blank">
+        <a style="m-[10px] px-1">
             {#if !loading}
-                
                 <img class="w-fit" src={item.imageSrc} />
 
                 <h1 class="h1 mt-10">
@@ -53,7 +60,6 @@
                 <div class="w-fit mt-[10px]">
                     <Feed items={related_items} />
                 </div>
-
             {/if}
         </a>
         <div class="flex justify-center mt-[100px] mb-[100px]">
@@ -63,3 +69,4 @@
         </div>
     </div>
 </div>
+{/key}
