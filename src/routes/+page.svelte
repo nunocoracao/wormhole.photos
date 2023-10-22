@@ -1,7 +1,7 @@
 <script>
     import { onMount } from "svelte";
     import { ProgressRadial } from "@skeletonlabs/skeleton";
-    import { inview } from "svelte-inview/dist/index";
+    import { inview } from "svelte-inview";
     import { getFeed } from "$lib/firebase.js";
     import Feed from "../components/Feed.svelte";
     import { items } from "$lib/stores.js";
