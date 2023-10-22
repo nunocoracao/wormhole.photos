@@ -7,7 +7,8 @@ import {
     getDocs,
     query,
     orderBy,
-    limit
+    limit,
+    where
 } from "firebase/firestore";
 var firebaseConfig = {
     apiKey: "AIzaSyAkwNz2JbrZcpI7NjWZW5JkjN6VyHeQs5k",
@@ -21,9 +22,16 @@ initializeApp(firebaseConfig);
 
 const db = getFirestore();
 
-export const getFeed = async () => {
+export const getFeed = async (size, after) => {
     return new Promise(async (resolve, reject) => {
-        const q = query(collection(db, "feed"), orderBy("timestamp", "desc"), limit(200));
+        let q;
+        if (after) {
+            console.log('where')
+            q = query(collection(db, "feed"), where('timestamp', '<' , after), orderBy("timestamp", "desc"), limit(size));
+        } else {
+            console.log('nowhere')
+            q = query(collection(db, "feed"), orderBy("timestamp", "desc"), limit(size));
+        }
         const querySnapshot = await getDocs(q);
         const docs = [];
         querySnapshot.forEach((doc) =>
