@@ -34,7 +34,20 @@ export const getFeed = async (size, after) => {
         const docs = [];
         querySnapshot.forEach((doc) =>
             docs.push({
-                id: doc.id,
+                ...doc.data(),
+            })
+        );
+        resolve(docs);
+    });
+};
+
+export const getIds = async (ids) => {
+    return new Promise(async (resolve, reject) => {
+        let q = query(collection(db, "feed"), where('id', 'in' , ids), orderBy("timestamp", "desc"));
+        const querySnapshot = await getDocs(q);
+        const docs = [];
+        querySnapshot.forEach((doc) =>
+            docs.push({
                 ...doc.data(),
             })
         );

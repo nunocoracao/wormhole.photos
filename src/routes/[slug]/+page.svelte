@@ -1,29 +1,65 @@
 <script>
-    import { getItem } from "$lib/firebase.js";
-
-    //import { feedItem } from '$lib/stores.js'
+    import { ProgressRadial } from "@skeletonlabs/skeleton";
+    import { getItem, getIds } from "$lib/firebase.js";
+    import Feed from "../../components/Feed.svelte";
 
     export let data;
+    let loading = true;
 
-    //console.log(data.slug);
-    //console.log(feedItem)
-
-    //test qFVVxdHYoOYKKTCJ1648
-
-    let item = {};
+    let item = null;
+    let related_items = [];
 
     getItem(data.slug).then((data) => {
-        console.log(data);
         item = data;
+        loading = false;
+        var related_ids = []
+        for(var i in item.links){
+            related_ids.push(item.links[i].id)
+        }
+        getIds(related_ids).then((data) => {
+            related_items = data
+        })
     });
+
 </script>
 
 <div class="justify-center">
-    <div class="w-fit max-w-[2100px] mx-auto pt-10">
-        <a style="margin:10px" target="_blank">
-            <h1 class="text-xl">{item.title}</h1>
-            <!--p>{item.timestamp}</p-->
-            <img class="w-[1000px]" src={item.imageSrc} />
+    <div class="w-fit max-w-[900px] mx-auto pt-40">
+        <a style="m-[10px]" target="_blank">
+            {#if !loading}
+                
+                <img class="max-w-[600px]" src={item.imageSrc} />
+
+                <h1 class="h1 mt-10">
+                    {item.title}
+                    <a target="_blank" href={item.url} class="h2 anchor"
+                        >Original page</a
+                    >
+                </h1>
+                <h2 class="h2">
+                    Credits:
+                    {#if item && item.credits && item.credits.length > 0}
+                        {#each item.credits as credit}
+                            <a
+                                target="_blank"
+                                class="h3 anchor"
+                                href={credit.url}>{credit.text}</a
+                            >
+                        {/each}
+                    {/if}
+                </h2>
+
+                <h1 class="h1 mt-20">Related</h1>
+                <div class="w-fit mt-[10px]">
+                    <Feed items={related_items} />
+                </div>
+
+            {/if}
         </a>
+        <div class="flex justify-center mt-[100px] mb-[100px]">
+            {#if loading}
+                <ProgressRadial value={undefined} />
+            {/if}
+        </div>
     </div>
 </div>

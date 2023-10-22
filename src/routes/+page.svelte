@@ -1,7 +1,6 @@
 <script>
     import { onMount } from "svelte";
     import { ProgressRadial } from "@skeletonlabs/skeleton";
-    //import { inview } from "svelte-inview";
     import { getFeed } from "$lib/firebase.js";
     import Feed from "../components/Feed.svelte";
     import { items } from "$lib/stores.js";
@@ -9,7 +8,7 @@
     let items_value;
     let element;
     let loading = true;
-    let limit = 10;
+    let limit = 12;
     let startAt = 0;
     let hasMore = true;
 
@@ -51,7 +50,7 @@
 </script>
 
 <div class="justify-center">
-    <div class="max-w-[1500px] mx-auto pt-10 overflow-hidden">
+    <div class="max-w-[1200px] mx-auto pt-[10px] overflow-hidden">
         <Feed items={items_value} />
     </div>
     <div bind:this={element} />
