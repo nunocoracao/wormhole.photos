@@ -24,11 +24,11 @@
 </script>
 
 <div class="justify-center">
-    <div class="w-fit max-w-[900px] mx-auto pt-40">
-        <a style="m-[10px]" target="_blank">
+    <div class="max-w-[900px] mx-auto pt-40">
+        <a style="m-[10px] px-1" target="_blank">
             {#if !loading}
                 
-                <img class="max-w-[600px]" src={item.imageSrc} />
+                <img class="w-fit" src={item.imageSrc} />
 
                 <h1 class="h1 mt-10">
                     {item.title}
