@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 import {
     getFirestore,
     collection,
@@ -21,6 +22,7 @@ var firebaseConfig = {
 initializeApp(firebaseConfig);
 
 const db = getFirestore();
+const analytics = getAnalytics();
 
 export const getFeed = async (size, after) => {
     return new Promise(async (resolve, reject) => {
