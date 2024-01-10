@@ -43,7 +43,7 @@
 
                     <h2 class="h2 mt-10">
                         {item.title}
-                        <a target="_blank" href={item.url} class="h2 anchor"
+                        <a target="_blank" href={item.url} class="h4 anchor"
                             >Original page</a
                         >
                     </h2>
