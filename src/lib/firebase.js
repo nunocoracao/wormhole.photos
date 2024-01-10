@@ -1,6 +1,4 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { browser } from '$app/environment';
 import {
     getFirestore,
     collection,
@@ -23,11 +21,6 @@ var firebaseConfig = {
 initializeApp(firebaseConfig);
 
 const db = getFirestore();
-var analytics = null;
-
-if(browser) {
-    analytics = getAnalytics();
-}
 
 export const getFeed = async (size, after) => {
     return new Promise(async (resolve, reject) => {
