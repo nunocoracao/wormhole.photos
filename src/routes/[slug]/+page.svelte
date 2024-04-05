@@ -1,4 +1,5 @@
 <script>
+    import { browser } from "$app/environment";
     import { onMount, onDestroy } from "svelte";
     import { ProgressRadial } from "@skeletonlabs/skeleton";
     import { getItem, getIds } from "$lib/firebase.js";
@@ -13,13 +14,15 @@
     let related_items = [];
 
     function convertToATag(inputString) {
-        return inputString.replace(/(\w+)\s*\[(.*?)\]/g, function(match, p1, p2) {
-            return `<a class="anchor" href="${p2}" target="_blank">${p1}</a>`;
-        });
+        return inputString.replace(
+            /(\w+)\s*\[(.*?)\]/g,
+            function (match, p1, p2) {
+                return `<a class="anchor" href="${p2}" target="_blank">${p1}</a>`;
+            }
+        );
     }
 
     $: {
-        window.scrollTo({ top: 0, behavior: "smooth" });
         getItem(data.slug).then((data) => {
             item = data;
             loading = false;
